@@ -51,6 +51,39 @@ class LoginViewController: UIViewController {
         return sv
     }()
     
+    let forgotBttn: UIButton = {
+        let bttn = UIButton(type: .system)
+        bttn.setTitle("Forgot your password?", for: .normal)
+        bttn.translatesAutoresizingMaskIntoConstraints = false
+        bttn.titleLabel?.font = bttn.titleLabel?.font.withSize(17)
+        return bttn
+    }()
+    let loginBttn: UIButton = {
+        let bttn = UIButton(type: .system)
+        bttn.setTitle("Login", for: .normal)
+        bttn.translatesAutoresizingMaskIntoConstraints = false
+        bttn.configuration = .filled()
+        bttn.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            return outgoing
+        }
+        return bttn
+            
+    }()
+    let facebookBttn: UIButton = {
+        let bttn = UIButton(type: .system)
+        bttn.setTitle("Login with Facebook", for: .normal)
+        bttn.translatesAutoresizingMaskIntoConstraints = false
+        bttn.configuration = .filled()
+        bttn.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            return outgoing
+        }
+        return bttn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +92,11 @@ class LoginViewController: UIViewController {
         view.addSubview(passwordText)
         view.addSubview(createButton)
         view.addSubview(stackView)
+        stackView.addArrangedSubview(forgotBttn
+        )
+        stackView.addArrangedSubview(loginBttn)
+        stackView.addArrangedSubview(facebookBttn)
+        
         
         view.backgroundColor = .lightGray
         
@@ -94,6 +132,19 @@ class LoginViewController: UIViewController {
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: passwordText.bottomAnchor, constant: 50).isActive = true
         stackView.bottomAnchor.constraint(equalTo: createButton.topAnchor, constant: -100).isActive = true
+        
+        loginBttn.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        loginBttn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        facebookBttn.widthAnchor.constraint(equalTo: loginBttn.widthAnchor, multiplier: 0.8).isActive = true
+        facebookBttn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        loginBttn.addTarget(self, action: #selector(goToPost(_:)), for: .touchUpInside)
+    }
+    
+    @objc func goToPost(_ sender: UIButton) {
+        let vc = PostViewController()
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 
