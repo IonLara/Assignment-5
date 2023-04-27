@@ -8,10 +8,13 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var profileImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        profileImage.layer.masksToBounds = true
+        profileImage.layer.cornerRadius = CGRectGetWidth(profileImage.frame) / 2
+        
     }
 
 
